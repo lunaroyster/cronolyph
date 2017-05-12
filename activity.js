@@ -3,6 +3,7 @@ var Record = class Record {
         this.start = start;
         this.stop = stop;
         this.activityID = activity.id;
+        console.log("Created Record");
     }
 }
 var Activity = class Activity {
@@ -11,6 +12,7 @@ var Activity = class Activity {
         this.active = false;
         this.records = [];
         this.id = this.constructor.generateRandomID(8);
+        console.log("Created Activity");
     }
     start() {
         if(this.active) return;
@@ -45,12 +47,14 @@ var Activity = class Activity {
         return Math.floor(Math.random()*(max-min+1)+min).toString(36);
     }
     get timeUntilNow() {
-        return Date.now - this.startTime;
+        if(!this.active) return;
+        return Date.now() - this.startTime;
     }
 }
 var ActivityContainer = class ActivityContainer {
     constructor() {
         this.activities = [];
+        console.log("Created ActivityContainer");
     }
     addActivity(activity) {
         this.activities.push(activity)

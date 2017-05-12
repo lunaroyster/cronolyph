@@ -1,0 +1,21 @@
+.text {
+  color: #52606A;
+  font-family: 'Open Sans', sans-serif;
+}
+body {
+  background-color: #131C23;
+  color: #52606A;
+  font-family: 'Open Sans', sans-serif;
+}
+#crons {
+  display: flex;
+  flex-wrap: wrap;
+}
+#crons .activity {
+  width: 312px;
+  height: 312px;
+  border: 1px solid transparent;
+}
+#crons .activity.active {
+  border-color: #362B1C;
+}

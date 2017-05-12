@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>cronolyph</title>
+
+        <!--Stylesheet Libraries and fonts-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <!--Javascript Libraries-->
+        <script src="https://use.fontawesome.com/66ac4a4e29.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
+        <script src="activity.js" charset="utf-8"></script>
+        <script src="app.js" charset="utf-8"></script>
+
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body ng-app="cronolyph" ng-controller="home" class="">
+        <input type="text" name="" ng-model="activityName" value="">
+        <a class="waves-effect waves-light btn" ng-click="createActivity()">Create Activity</a>
+        <div id="crons">
+            <div class="activity hoverable" ng-repeat="activity in ActivityContainer.activities" ng-click="switchState(activity)" ng-class="{active:activity.active}">
+                <!-- main -->
+                <div>
+                    {{activity.name}}
+                    {{activity.startTime}}
+                    <div ng-visible="activity.active" ng-bind="activity.timeUntilNow"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

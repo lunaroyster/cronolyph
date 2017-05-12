@@ -1,0 +1,25 @@
+@base: #131C23;
+@complement: #362B1C;
+@text-color: #52606A;
+
+.text {
+    color: @text-color;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    background-color: @base;
+    .text;
+}
+#crons {
+    display: flex;
+    flex-wrap: wrap;
+    .activity {
+        width:312px;
+        height:312px;
+        border: 1px solid transparent;
+        &.active {
+            border-color: @complement;
+        }
+    }
+}
