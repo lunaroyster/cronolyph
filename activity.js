@@ -2,17 +2,38 @@ var Record = class Record {
     constructor(activity, start, stop) {
         this.start = start;
         this.stop = stop;
-        this.activityID = activity.id;
+        if(activity) {
+            this.activityID = activity.id;
+        }
         console.log("Created Record");
+    }
+    static unserialize(record) {
+        var newRecord = new Record(undefined, record.start, record.stop);
+        newRecord.activityID = record.activityID;
+        return newRecord;
     }
 }
 var Activity = class Activity {
     constructor(name) {
         this.name = name;
-        this.active = false;
+        this.resetState();
         this.records = [];
         this.id = this.constructor.generateRandomID(8);
         console.log("Created Activity");
+    }
+    static unserialize(activity) {
+        var newActivity = new Activity(activity.name);
+        newActivity.id = activity.id;
+        newActivity.active = activity.active;
+        newActivity.unserializeRecords(activity.records);
+        return newActivity;
+    }
+    unserializeRecords(records) {
+        this.records = [];
+        for (let record of records) {
+            this.records.push(Record.unserialize(record));
+        }
+        return this.records;
     }
     start() {
         if(this.active) return;
@@ -56,6 +77,18 @@ var ActivityContainer = class ActivityContainer {
         this.activities = [];
         console.log("Created ActivityContainer");
     }
+    static unserialize(activityContainer) {
+        var newActivityContainer = new ActivityContainer();
+        newActivityContainer.unserializeActivities(activityContainer.activities);
+        return newActivityContainer;
+    };
+    unserializeActivities(activities) {
+        this.activities = [];
+        for (let activity of activities) {
+            console.log(this);
+            this.activities.push(Activity.unserialize(activity));
+        }
+    };
     addActivity(activity) {
         this.activities.push(activity)
     }
@@ -71,5 +104,5 @@ var cronolyph = {
     Record: Record,
     ActivityContainer: ActivityContainer
 };
-module.exports = cronolyph;
+// module.exports = cronolyph;
 window.cronolyph = cronolyph;
