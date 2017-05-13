@@ -25,6 +25,8 @@ var Activity = class Activity {
         var newActivity = new Activity(activity.name);
         newActivity.id = activity.id;
         newActivity.active = activity.active;
+        newActivity.startTime = activity.startTime;
+        newActivity.stopTime = activity.stopTime;
         newActivity.unserializeRecords(activity.records);
         return newActivity;
     }

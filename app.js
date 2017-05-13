@@ -14,7 +14,7 @@ app.service('cronolyphService', function() {
 app.factory('ActivityContainerService', function(cronolyphService) {
     var ActivityContainer = cronolyphService.ActivityContainer;
     if(localStorage.serializedActivityContainer) {
-        var ac = ActivityContainer.unserialize(localStorage.serializedActivityContainer);
+        var ac = ActivityContainer.unserialize(JSON.parse(localStorage.serializedActivityContainer));
     }
     else {
         var ac = new cronolyphService.ActivityContainer();
@@ -22,7 +22,7 @@ app.factory('ActivityContainerService', function(cronolyphService) {
     setInterval(function () {
         console.log("Syncing");
         localStorage.serializedActivityContainer = JSON.stringify(ac);
-    }, 5000);
+    }, 1000);
     return ac;
 });
 
@@ -55,5 +55,5 @@ app.controller('home', function($scope, ActivityContainerService) {
         //     fn();
         // }
         $scope.$digest();
-    }, 100);
+    }, 50);
 });
