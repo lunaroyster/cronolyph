@@ -12,8 +12,18 @@ app.service('cronolyphService', function() {
 })
 
 app.factory('ActivityContainerService', function(cronolyphService) {
-    var ActivityContainer = new cronolyphService.ActivityContainer();
-    return ActivityContainer;
+    var ActivityContainer = cronolyphService.ActivityContainer;
+    if(localStorage.serializedActivityContainer) {
+        var ac = ActivityContainer.unserialize(localStorage.serializedActivityContainer);
+    }
+    else {
+        var ac = new cronolyphService.ActivityContainer();
+    }
+    setInterval(function () {
+        console.log("Syncing");
+        localStorage.serializedActivityContainer = JSON.stringify(ac);
+    }, 5000);
+    return ac;
 });
 
 app.controller('home', function($scope, ActivityContainerService) {
