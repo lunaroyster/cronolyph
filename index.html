@@ -15,21 +15,36 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-duration-format/1.3.0/moment-duration-format.js" charset="utf-8"></script>
         <script src="activity.js" charset="utf-8"></script>
         <script src="app.js" charset="utf-8"></script>
 
         <link rel="stylesheet" href="style.css">
     </head>
     <body ng-app="cronolyph" ng-controller="home" class="">
-        <input type="text" name="" ng-model="activityName" value="">
-        <a class="waves-effect waves-light btn" ng-click="createActivity()">Create Activity</a>
+        <nav>
+            <ul>
+                <li>
+                    <a ng-click="showActivityModal()">Add activity</a>
+                </li>
+            </ul>
+        </nav>
+        <div id="newActivity" class="modal bottom-sheet">
+            <div class="modal-content">
+                <input type="text" name="" ng-model="activityName" value="">
+                <a class="waves-effect waves-light btn" ng-click="createActivity()">Create Activity</a>
+            </div>
+        </div>
         <div id="crons">
             <div class="activity hoverable" ng-repeat="activity in ActivityContainer.activities" ng-click="switchState(activity)" ng-class="{active:activity.active}">
                 <!-- main -->
                 <div>
-                    {{activity.name}}
-                    {{activity.startTime}}
-                    <div ng-visible="activity.active" ng-bind="activity.timeUntilNow"></div>
+                    <div class="name" ng-bind="activity.name"></div>
+                    <div ng-show="activity.active">
+                        <!-- <div ng-bind="activity.startTime"></div> -->
+                        <div ng-bind="timeUntilNow(activity)"></div>
+                    </div>
                 </div>
             </div>
         </div>

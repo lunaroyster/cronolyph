@@ -11,15 +11,37 @@ body {
     background-color: @base;
     .text;
 }
+nav {
+    background-color: darken(@base, 5%);
+}
+.lighten-hover(@base-color) {
+    background-color: @base-color;
+    &:hover {
+        background-color: lighten(@base-color, 5%);
+    }
+}
+.btn {
+    .lighten-hover(lighten(@base, 5%));
+}
 #crons {
     display: flex;
     flex-wrap: wrap;
     .activity {
         width:312px;
         height:312px;
+        padding: 1em;
         border: 1px solid transparent;
-        &.active {
-            border-color: @complement;
+        .name {
+            font-size: 2em;
         }
+        &.active {
+            border-color: lighten(@base, 5%);
+        }
+    }
+}
+#newActivity {
+    background-color: @complement;
+    .btn {
+        .lighten-hover(lighten(@complement, 5%));
     }
 }

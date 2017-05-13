@@ -1,3 +1,9 @@
+$(document).ready(function(){
+    window.newActivity = $('#newActivity');
+    window.newActivity.modal({
+        opacity: 0.5
+    });
+});
 // import * as activityLib from "activity";
 var app = angular.module("cronolyph", ['ngRoute']);
 
@@ -19,10 +25,19 @@ app.controller('home', function($scope, ActivityContainerService) {
     $scope.switchState = function(activity) {
         if(activity.active) {
             activity.stop();
+            localStorage.activities = ActivityContainer.activities;
         }
         else {
             activity.start();
         }
+    };
+    $scope.showActivityModal = function() {
+        // console.log(angular.element('#newActivity'))
+        window.newActivity.modal('open');
+    };
+    $scope.timeUntilNow = function(activity) {
+        d = activity.timeUntilNow;
+        return moment.duration(d).format("HH mm ss S")
     }
     // $scope.updateCallbacks = [];
     setInterval(function () {
@@ -30,5 +45,5 @@ app.controller('home', function($scope, ActivityContainerService) {
         //     fn();
         // }
         $scope.$digest();
-    }, 50);
+    }, 100);
 });

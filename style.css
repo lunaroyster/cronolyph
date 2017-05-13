@@ -7,6 +7,15 @@ body {
   color: #52606A;
   font-family: 'Open Sans', sans-serif;
 }
+nav {
+  background-color: #0a0f12;
+}
+.btn {
+  background-color: #1c2934;
+}
+.btn:hover {
+  background-color: #253644;
+}
 #crons {
   display: flex;
   flex-wrap: wrap;
@@ -14,8 +23,21 @@ body {
 #crons .activity {
   width: 312px;
   height: 312px;
+  padding: 1em;
   border: 1px solid transparent;
 }
+#crons .activity .name {
+  font-size: 2em;
+}
 #crons .activity.active {
-  border-color: #362B1C;
+  border-color: #1c2934;
+}
+#newActivity {
+  background-color: #362B1C;
+}
+#newActivity .btn {
+  background-color: #473825;
+}
+#newActivity .btn:hover {
+  background-color: #58462d;
 }
