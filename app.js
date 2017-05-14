@@ -25,6 +25,18 @@ app.factory('ActivityContainerService', function(cronolyphService) {
     return ac;
 });
 
+app.directive('ngRightClick', function($parse) {
+    return function(scope, element, attrs) {
+        var fn = $parse(attrs.ngRightClick);
+        element.bind('contextmenu', function(event) {
+            scope.$apply(function() {
+                event.preventDefault();
+                fn(scope, {$event:event});
+            });
+        });
+    };
+});
+
 app.controller('home', function($scope, ActivityContainerService) {
     $scope.ActivityContainer = ActivityContainerService;
     $scope.activityName = "Activity";
@@ -41,6 +53,11 @@ app.controller('home', function($scope, ActivityContainerService) {
             activity.start();
         }
     };
+    $scope.deleteActivity = function(e, activity) {
+        if(e.which===3) {
+            ActivityContainerService.removeActivity(activity);
+        }
+    }
     $scope.showActivityModal = function() {
         // console.log(angular.element('#newActivity'))
         window.newActivity.modal('open');

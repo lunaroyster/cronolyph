@@ -38,7 +38,7 @@
             </div>
         </div>
         <div id="crons">
-            <div class="activity hoverable" ng-repeat="activity in ActivityContainer.activities" ng-click="switchState(activity)" ng-class="{active:activity.active}">
+            <div class="activity hoverable" ng-repeat="activity in ActivityContainer.activities" ng-click="switchState(activity)" ng-right-click="deleteActivity($event, activity)" ng-class="{active:activity.active}">
                 <!-- main -->
                 <div>
                     <div class="name" ng-bind="activity.name"></div>
