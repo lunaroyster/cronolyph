@@ -69,6 +69,12 @@ var Activity = class Activity {
         var max = (Math.pow(36,length))-1;
         return Math.floor(Math.random()*(max-min+1)+min).toString(36);
     }
+    removeRecord(record) {
+        this.records = _(this.records).without(record);
+    }
+    removeRecords() {
+        this.records = [];
+    }
     get timeUntilNow() {
         if(!this.active) return;
         return Date.now() - this.startTime;
@@ -93,6 +99,12 @@ var ActivityContainer = class ActivityContainer {
     };
     addActivity(activity) {
         this.activities.push(activity)
+    }
+    removeActivity(activity) {
+        this.activities = _(this.activities).without(activity);
+    }
+    removeActivities() {
+        this.activities = [];
     }
     createActivity(name) {
         var newActivity = new Activity(name);
